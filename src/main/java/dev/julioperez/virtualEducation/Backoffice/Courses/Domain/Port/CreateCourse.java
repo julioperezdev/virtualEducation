@@ -5,12 +5,6 @@ import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCat
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseName;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CoursePrice;
 
-import java.util.List;
-
-public interface CourseRepository {
-    List<Course> getAllCourses();
-    Course getCourseByPrice(CoursePrice coursePrice);
-    Course getCourseByCategory(CourseCategory category);
+public interface CreateCourse {
     Course createCourse(CourseName name, CoursePrice price, CourseCategory category);
-    Void createCourseModel(Course course);
 }
