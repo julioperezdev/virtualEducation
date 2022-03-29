@@ -4,7 +4,11 @@ import dev.julioperez.virtualEducation.Shared.Domain.ValueObject.StringValueObje
 
 public class CourseCategory extends StringValueObject {
 
-    protected CourseCategory(String value) {
+    public CourseCategory(String value) {
         super(value);
+    }
+
+    private CourseCategory(){
+        super("");
     }
 }

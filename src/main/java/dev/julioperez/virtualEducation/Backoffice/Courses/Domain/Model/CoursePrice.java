@@ -4,7 +4,11 @@ import dev.julioperez.virtualEducation.Shared.Domain.ValueObject.LongValueObject
 
 public class CoursePrice extends LongValueObject {
 
-    protected CoursePrice(Long value) {
+    public CoursePrice(Long value) {
         super(value);
+    }
+
+    public CoursePrice() {
+        super(0L);
     }
 }

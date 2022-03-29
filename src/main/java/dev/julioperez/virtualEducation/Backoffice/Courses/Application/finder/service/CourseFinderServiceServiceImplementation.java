@@ -7,11 +7,11 @@ import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CourseRepo
 
 import java.util.List;
 
-public class CourseFinderImplementation implements CourseFinder{
+public class CourseFinderServiceServiceImplementation implements CourseFinderService {
 
     private final CourseRepository courseRepository;
 
-    public CourseFinderImplementation(CourseRepository courseRepository) {
+    public CourseFinderServiceServiceImplementation(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
 
