@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "course")
 @NoArgsConstructor
@@ -16,6 +15,8 @@ import javax.persistence.Id;
 public class CourseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courseEntitySequence")
+    @SequenceGenerator(name = "courseEntitySequence", allocationSize = 1)
     private Long id;
     private String name;
     private Long price;
