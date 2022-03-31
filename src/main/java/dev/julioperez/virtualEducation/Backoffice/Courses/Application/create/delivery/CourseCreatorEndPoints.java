@@ -15,6 +15,9 @@ public class CourseCreatorEndPoints {
     }
 
     public CourseCreatorResponse createCourse(CourseCreatorRequest courseCreatorRequest){
+        if (courseCreatorRequest.validateFields()) {
+            throw new CourseCreatorRequestDontHaveRequirement(courseCreatorRequest);
+        }
         Course course = courseCreatorService.createCourse(
                 new CourseName(courseCreatorRequest.getName()),
                 new CoursePrice(courseCreatorRequest.getPrice()),
@@ -23,6 +26,9 @@ public class CourseCreatorEndPoints {
     }
 
     public CourseCreatorResponse createCourseModel(CourseCreatorRequest courseCreatorRequest){
+        if (courseCreatorRequest.validateFields()) {
+            throw new CourseCreatorRequestDontHaveRequirement(courseCreatorRequest);
+        }
         Course courseModel = courseCreatorService.createCourseModel(courseCreatorModelMapper.toCourse(courseCreatorRequest));
         return courseCreatorModelMapper.toCourseCreatorResponse(courseModel);
     }

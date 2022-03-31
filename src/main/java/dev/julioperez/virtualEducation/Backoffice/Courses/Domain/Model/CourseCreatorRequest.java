@@ -31,14 +31,14 @@ public class CourseCreatorRequest {
     }
 
     private Boolean validateName(){
-        return !Objects.equals(name, null) && !Objects.equals(name, "");
+        return Objects.equals(name, null) || Objects.equals(name, "");
     }
 
     private Boolean validateCategory(){
-        return !Objects.equals(category, null) && !Objects.equals(category, "");
+        return Objects.equals(category, null) || Objects.equals(category, "");
     }
 
     private Boolean validatePrice(){
-        return !Objects.equals(price, null) && price > 0;
+        return Objects.equals(price, null) || price <= 0;
     }
 }

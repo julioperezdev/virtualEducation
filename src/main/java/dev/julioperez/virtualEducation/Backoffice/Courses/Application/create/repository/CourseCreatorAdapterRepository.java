@@ -1,9 +1,6 @@
 package dev.julioperez.virtualEducation.Backoffice.Courses.Application.create.repository;
 
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.Course;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCategory;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseName;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CoursePrice;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.*;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CourseCreatorRepository;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Infrastructure.Repository.Dao.CourseDao;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Infrastructure.Repository.Model.CourseEntity;
@@ -35,8 +32,18 @@ public class CourseCreatorAdapterRepository implements CourseCreatorRepository {
     }
 
     private CourseEntity createCourseEntity(Course courseToRecord) {
+        this.checkIfExistCourseByName(courseToRecord);
         return Optional
                 .of(courseDao.save(courseModelMapper.toEntity(courseToRecord)))
                 .orElseThrow(IllegalArgumentException::new);
     }
+
+    private void checkIfExistCourseByName(Course course){
+        Optional<CourseEntity> courseEntityByName = courseDao.getFirstByName(course.name().value());
+        if(courseEntityByName.isPresent()){
+            throw new RuntimeException("Ya existe el curso");
+        }
+    }
+
+
 }

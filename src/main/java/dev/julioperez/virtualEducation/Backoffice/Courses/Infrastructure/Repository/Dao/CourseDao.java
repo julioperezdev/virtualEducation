@@ -12,5 +12,7 @@ public interface CourseDao extends JpaRepository<CourseEntity, Long> {
     @Query(value = "SELECT * FROM COURSE WHERE PRICE = :price ", nativeQuery = true)
     Optional<CourseEntity> getCourseByPrice(@Param("price") Long price);
 
+    Optional<CourseEntity> getFirstByName(String name);
+
     Optional<CourseEntity> getCourseEntityByCategory(String category);
 }
