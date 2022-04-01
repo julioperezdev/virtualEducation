@@ -5,22 +5,22 @@ import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.*;
 public class CourseCreatorRequestResponseModelMapper {
 
     public Course toCourse(CourseCreatorRequest courseCreatorRequest){
-        CourseName name = new CourseName(courseCreatorRequest.getName());
-        CoursePrice price = new CoursePrice(courseCreatorRequest.getPrice());
-        CourseCategory category = new CourseCategory(courseCreatorRequest.getCategory());
+        String name = courseCreatorRequest.getName();
+        Long price = courseCreatorRequest.getPrice();
+        String category = courseCreatorRequest.getCategory();
         return Course.create(name, price, category);
     }
 
     public CourseCreatorResponse toCourseCreatorResponse(Course course){
-        String name = course.name().value();
-        Long price = course.price().value();
-        String category = course.category().value();
+        String name = course.getName();
+        Long price = course.getPrice();
+        String category = course.getCategory();
         return new CourseCreatorResponse(name, category, price);
     }
     public CourseCreatorRequest toCourseCreatorRequest(Course course){
-        String name = course.name().value();
-        Long price = course.price().value();
-        String category = course.category().value();
+        String name = course.getName();
+        Long price = course.getPrice();
+        String category = course.getCategory();
         return new CourseCreatorRequest(name, price, category);
     }
 }

@@ -5,7 +5,6 @@ import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CourseCrea
 import dev.julioperez.virtualEducation.Backoffice.Courses.Infrastructure.Repository.Dao.CourseDao;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Infrastructure.Repository.Model.CourseEntity;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Application.ModelMapper.CourseModelMapper;
-
 import java.util.Optional;
 
 public class CourseCreatorAdapterRepository implements CourseCreatorRepository {
@@ -19,14 +18,7 @@ public class CourseCreatorAdapterRepository implements CourseCreatorRepository {
     }
 
     @Override
-    public Course createCourse(CourseName name, CoursePrice price, CourseCategory category) {
-        Course courseToRecord = new Course(name, price, category);
-        CourseEntity courseEntityRecorded = createCourseEntity(courseToRecord);
-        return courseModelMapper.toDomainModel(courseEntityRecorded);
-    }
-
-    @Override
-    public Course createCourseModel(Course course) {
+    public Course createCourse(Course course) {
         CourseEntity courseEntityRecorded = createCourseEntity(course);
         return courseModelMapper.toDomainModel(courseEntityRecorded);
     }
@@ -35,15 +27,15 @@ public class CourseCreatorAdapterRepository implements CourseCreatorRepository {
         this.checkIfExistCourseByName(courseToRecord);
         return Optional
                 .of(courseDao.save(courseModelMapper.toEntity(courseToRecord)))
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new CourseDoesNotRecorded(courseToRecord));
     }
 
     private void checkIfExistCourseByName(Course course){
-        Optional<CourseEntity> courseEntityByName = courseDao.getFirstByName(course.name().value());
+        Optional<CourseEntity> courseEntityByName = courseDao.getFirstByName(course.getName());
         if(courseEntityByName.isPresent()){
-            throw new RuntimeException("Ya existe el curso");
+            throw new CourseCanNotHaveSameName(courseModelMapper
+                    .toDomainModel(courseEntityByName.get())
+                    .getName());
         }
     }
-
-
 }

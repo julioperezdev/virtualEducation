@@ -1,9 +1,6 @@
 package dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port;
 
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.Course;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCategory;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseName;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CoursePrice;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.*;
 
 import java.util.List;
 

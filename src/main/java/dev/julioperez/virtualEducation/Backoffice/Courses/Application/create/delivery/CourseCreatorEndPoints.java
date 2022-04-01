@@ -18,18 +18,7 @@ public class CourseCreatorEndPoints {
         if (courseCreatorRequest.validateFields()) {
             throw new CourseCreatorRequestDontHaveRequirement(courseCreatorRequest);
         }
-        Course course = courseCreatorService.createCourse(
-                new CourseName(courseCreatorRequest.getName()),
-                new CoursePrice(courseCreatorRequest.getPrice()),
-                new CourseCategory(courseCreatorRequest.getCategory()));
+        Course course = courseCreatorService.createCourse(courseCreatorModelMapper.toCourse(courseCreatorRequest));
         return courseCreatorModelMapper.toCourseCreatorResponse(course);
-    }
-
-    public CourseCreatorResponse createCourseModel(CourseCreatorRequest courseCreatorRequest){
-        if (courseCreatorRequest.validateFields()) {
-            throw new CourseCreatorRequestDontHaveRequirement(courseCreatorRequest);
-        }
-        Course courseModel = courseCreatorService.createCourseModel(courseCreatorModelMapper.toCourse(courseCreatorRequest));
-        return courseCreatorModelMapper.toCourseCreatorResponse(courseModel);
     }
 }
