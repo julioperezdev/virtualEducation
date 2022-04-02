@@ -1,8 +1,8 @@
 package dev.julioperez.virtualEducation.Shared.Infrastructure.config;
 
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCanNotHaveSameName;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCreatorRequestDontHaveRequirement;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseDoesNotRecorded;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCanNotHaveSameNameException;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCreatorRequestDontHaveRequirementException;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseDoesNotRecordedException;
 import dev.julioperez.virtualEducation.Shared.Domain.DomainError;
 import org.springframework.http.HttpStatus;
 
@@ -12,11 +12,11 @@ public enum SupportedExceptions {
     //..
 
     //CourseCreatorEndpoints Exceptions
-    COURSE_CREATOR_REQUEST_DONT_HAVE_REQUIREMENT(CourseCreatorRequestDontHaveRequirement.class, HttpStatus.PRECONDITION_FAILED),
+    COURSE_CREATOR_REQUEST_DONT_HAVE_REQUIREMENT(CourseCreatorRequestDontHaveRequirementException.class, HttpStatus.PRECONDITION_FAILED),
 
     //CourseCreatorAdapterRepository Exceptions
-    COURSE_DOES_NOT_RECORDED(CourseDoesNotRecorded.class, HttpStatus.BAD_GATEWAY),
-    COURSE_CAN_NOT_HAVE_SAME_NAME(CourseCanNotHaveSameName.class, HttpStatus.PRECONDITION_REQUIRED);
+    COURSE_DOES_NOT_RECORDED(CourseDoesNotRecordedException.class, HttpStatus.BAD_GATEWAY),
+    COURSE_CAN_NOT_HAVE_SAME_NAME(CourseCanNotHaveSameNameException.class, HttpStatus.PRECONDITION_REQUIRED);
 
 
     private Class<? extends DomainError> exceptionClass;

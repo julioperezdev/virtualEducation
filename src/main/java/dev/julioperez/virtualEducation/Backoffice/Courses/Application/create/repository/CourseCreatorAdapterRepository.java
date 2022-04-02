@@ -27,13 +27,13 @@ public class CourseCreatorAdapterRepository implements CourseCreatorRepository {
         this.checkIfExistCourseByName(courseToRecord);
         return Optional
                 .of(courseDao.save(courseModelMapper.toEntity(courseToRecord)))
-                .orElseThrow(() -> new CourseDoesNotRecorded(courseToRecord));
+                .orElseThrow(() -> new CourseDoesNotRecordedException(courseToRecord));
     }
 
     private void checkIfExistCourseByName(Course course){
         Optional<CourseEntity> courseEntityByName = courseDao.getFirstByName(course.getName());
         if(courseEntityByName.isPresent()){
-            throw new CourseCanNotHaveSameName(courseModelMapper
+            throw new CourseCanNotHaveSameNameException(courseModelMapper
                     .toDomainModel(courseEntityByName.get())
                     .getName());
         }

@@ -16,7 +16,7 @@ public class CourseCreatorEndPoints {
 
     public CourseCreatorResponse createCourse(CourseCreatorRequest courseCreatorRequest){
         if (courseCreatorRequest.validateFields()) {
-            throw new CourseCreatorRequestDontHaveRequirement(courseCreatorRequest);
+            throw new CourseCreatorRequestDontHaveRequirementException(courseCreatorRequest);
         }
         Course course = courseCreatorService.createCourse(courseCreatorModelMapper.toCourse(courseCreatorRequest));
         return courseCreatorModelMapper.toCourseCreatorResponse(course);

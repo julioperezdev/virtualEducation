@@ -1,23 +1,25 @@
 package dev.julioperez.virtualEducation.Backoffice.Courses.Application.finder.service;
 
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.Course;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CourseRepository;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CourseFinderRepository;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class CourseFinderServiceImplementation implements CourseFinderService {
 
-    private final CourseRepository courseRepository;
+    private final CourseFinderRepository courseFinderRepository;
 
-    public CourseFinderServiceImplementation(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
+    public CourseFinderServiceImplementation(CourseFinderRepository courseFinderRepository) {
+        this.courseFinderRepository = courseFinderRepository;
     }
+
 
     @Override
     public List<Course> getAllCoursesOrderedByCategory() {
         Comparator<Course> courseOrderedByCategory =Comparator
-                .comparing(Course::getCategory);
+                .comparing(Course::getCategory)
+                .thenComparing(Course::getPrice);
         return orderCourseByComparator(courseOrderedByCategory);
     }
 
@@ -25,19 +27,20 @@ public class CourseFinderServiceImplementation implements CourseFinderService {
     public List<Course> getAllCoursesOrderedByLowerPrice() {
         Comparator<Course> courseOrderedByLowerPrice =Comparator
                 .comparing(Course::getPrice)
-                .reversed();
+                .thenComparing(Course::getName);
         return orderCourseByComparator(courseOrderedByLowerPrice);
     }
 
     @Override
     public List<Course> getAllCoursesOrderedByName() {
         Comparator<Course> courseOrderedByName =Comparator
-                .comparing(Course::getName);
+                .comparing(Course::getName)
+                .thenComparing(Course::getPrice);
         return orderCourseByComparator(courseOrderedByName);
     }
 
     private List<Course> orderCourseByComparator(Comparator<Course> courseOrderedByName) {
-        return courseRepository.getAllCourses()
+        return courseFinderRepository.getAllCourses()
                 .stream()
                 .sorted(courseOrderedByName)
                 .toList();

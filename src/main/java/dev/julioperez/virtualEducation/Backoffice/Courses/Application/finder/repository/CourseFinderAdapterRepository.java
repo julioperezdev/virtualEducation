@@ -2,19 +2,18 @@ package dev.julioperez.virtualEducation.Backoffice.Courses.Application.finder.re
 
 import dev.julioperez.virtualEducation.Backoffice.Courses.Application.ModelMapper.CourseModelMapper;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.Course;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseA;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CoursesFinderRepository;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CourseFinderRepository;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Infrastructure.Repository.Dao.CourseDao;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CoursesFinderAdapterRepository implements CoursesFinderRepository {
+public class CourseFinderAdapterRepository implements CourseFinderRepository {
 
     private final CourseDao courseDao;
     private final CourseModelMapper courseModelMapper;
 
-    public CoursesFinderAdapterRepository(CourseDao courseDao, CourseModelMapper courseModelMapper) {
+    public CourseFinderAdapterRepository(CourseDao courseDao, CourseModelMapper courseModelMapper) {
         this.courseDao = courseDao;
         this.courseModelMapper = courseModelMapper;
     }
