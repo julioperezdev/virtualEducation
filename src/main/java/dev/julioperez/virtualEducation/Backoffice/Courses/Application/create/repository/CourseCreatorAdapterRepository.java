@@ -1,5 +1,7 @@
 package dev.julioperez.virtualEducation.Backoffice.Courses.Application.create.repository;
 
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Exeptions.CourseCanNotHaveSameNameException;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Exeptions.CourseDoesNotRecordedException;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.*;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Port.CourseCreatorRepository;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Infrastructure.Repository.Dao.CourseDao;

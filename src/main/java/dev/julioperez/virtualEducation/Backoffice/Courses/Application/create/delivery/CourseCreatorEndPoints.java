@@ -1,6 +1,7 @@
 package dev.julioperez.virtualEducation.Backoffice.Courses.Application.create.delivery;
 
 import dev.julioperez.virtualEducation.Backoffice.Courses.Application.create.service.CourseCreatorService;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Exeptions.CourseCreatorRequestDontHaveRequirementException;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.*;
 import dev.julioperez.virtualEducation.Backoffice.Courses.Application.ModelMapper.CourseCreatorRequestResponseModelMapper;
 

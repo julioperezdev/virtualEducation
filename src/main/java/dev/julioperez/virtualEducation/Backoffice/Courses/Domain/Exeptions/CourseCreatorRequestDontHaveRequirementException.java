@@ -1,5 +1,6 @@
-package dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model;
+package dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Exeptions;
 
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCreatorRequest;
 import dev.julioperez.virtualEducation.Shared.Domain.DomainError;
 
 public class CourseCreatorRequestDontHaveRequirementException extends DomainError {

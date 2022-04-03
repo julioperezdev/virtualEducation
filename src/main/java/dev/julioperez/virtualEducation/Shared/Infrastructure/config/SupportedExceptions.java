@@ -1,8 +1,8 @@
 package dev.julioperez.virtualEducation.Shared.Infrastructure.config;
 
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCanNotHaveSameNameException;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseCreatorRequestDontHaveRequirementException;
-import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Model.CourseDoesNotRecordedException;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Exeptions.CourseCanNotHaveSameNameException;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Exeptions.CourseCreatorRequestDontHaveRequirementException;
+import dev.julioperez.virtualEducation.Backoffice.Courses.Domain.Exeptions.CourseDoesNotRecordedException;
 import dev.julioperez.virtualEducation.Shared.Domain.DomainError;
 import org.springframework.http.HttpStatus;
 
