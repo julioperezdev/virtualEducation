@@ -1,11 +1,14 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository.Model;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
 
+@Data
 @Entity
 @Table(name = "token")
 public class VerificationTokenEntity {
@@ -34,37 +37,4 @@ public class VerificationTokenEntity {
         this.userId = userId;
         this.expiryDate = expiryDate;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Instant getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Instant expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
 }
