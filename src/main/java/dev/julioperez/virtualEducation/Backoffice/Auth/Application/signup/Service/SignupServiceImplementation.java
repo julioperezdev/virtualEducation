@@ -13,12 +13,12 @@ public class SignupServiceImplementation implements SignupService{
     }
 
     @Override
-    public void fetchUserAndEnable(VerificationToken verificationToken) {
+    public void signup(RegisterRequest registerRequest) {
 
     }
 
     @Override
-    public void signup(RegisterRequest registerRequest) {
+    public void verifyAccount(String token) {
 
     }
 }
