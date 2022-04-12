@@ -1,5 +1,7 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model;
 
+import java.util.Objects;
+
 public class RegisterRequest {
     private String email;
     private String username;
@@ -11,6 +13,22 @@ public class RegisterRequest {
         this.username = username;
         this.password = password;
         this.idRol = idRol;
+    }
+
+    public Boolean validateFields(){
+        return validateUsername() || validatePassword()  || validateIdRol();
+    }
+
+    private Boolean validateUsername(){
+        return Objects.equals(username, null) || Objects.equals(username, "");
+    }
+
+    private Boolean validatePassword(){
+        return Objects.equals(password, null) || Objects.equals(password, "");
+    }
+
+    private Boolean validateIdRol(){
+        return Objects.equals(idRol, null) || idRol <= 0;
     }
 
     public String getEmail() {
