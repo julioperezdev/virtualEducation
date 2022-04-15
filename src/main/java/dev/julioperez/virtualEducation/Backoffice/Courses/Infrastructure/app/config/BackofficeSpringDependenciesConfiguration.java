@@ -22,7 +22,7 @@ import java.time.Duration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"dev.julioperez.virtualEducation.Backoffice"})
+@ComponentScan(basePackages = {"dev.julioperez.virtualEducation.Backoffice.Courses"})
 public class BackofficeSpringDependenciesConfiguration {
 
     private final CourseDao courseDao;
@@ -87,6 +87,10 @@ public class BackofficeSpringDependenciesConfiguration {
     CourseFinderEndPoints courseFinderController(){
         return new CourseFinderEndPoints(courseFinderServiceImplementation(), courseFinderResponseModelMapper());
     }
+
+    /**
+     *OTHERS
+     */
 
     @Bean
     public RestTemplate restTemplate(){

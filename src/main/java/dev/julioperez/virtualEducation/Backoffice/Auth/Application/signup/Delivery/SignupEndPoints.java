@@ -4,6 +4,7 @@ import dev.julioperez.virtualEducation.Backoffice.Auth.Application.ModelMapper.S
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.signup.Service.SignupService;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.RegisterRequest;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.RegisterResponse;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.VerifyTokenResponse;
 
 public class SignupEndPoints {
 
@@ -16,10 +17,13 @@ public class SignupEndPoints {
     }
 
     public RegisterResponse signupUser(RegisterRequest registerRequest){
-        return null;
+        //todo: create exception for registerRequest
+        if (registerRequest.validateFields()) throw new RuntimeException("registerRequest does not have requirements to follow the process");
+        Boolean processedSignupResponse = signupService.signup(registerRequest);
+        return signupModelMapper.processedSignupResponseToRegisterResponse(processedSignupResponse);
     }
 
-    public void verifyAccountByToken(String token){
-
+    public VerifyTokenResponse verifyAccountByToken(String token){
+        return signupService.verifyAccount(token);
     }
 }

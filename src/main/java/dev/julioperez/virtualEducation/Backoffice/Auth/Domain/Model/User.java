@@ -1,20 +1,19 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class User {
 
     private Long id;
-    private String username;
     private String password;
     private String email;
-    private Date created;
+    private Calendar created;
     private Boolean enable;
-    private Integer idRol;
+    private Long idRol;
 
-    public User(Long id, String username, String password, String email, Date created, Boolean enable, Integer idRol) {
+    public User(Long id, String password, String email, Calendar created, Boolean enable, Long idRol) {
         this.id = id;
-        this.username = username;
         this.password = password;
         this.email = email;
         this.created = created;
@@ -22,8 +21,7 @@ public class User {
         this.idRol = idRol;
     }
 
-    public User(String username, String password, String email, Date created, Boolean enable, Integer idRol) {
-        this.username = username;
+    public User( String password, String email, Calendar created, Boolean enable, Long idRol) {
         this.password = password;
         this.email = email;
         this.created = created;
@@ -37,14 +35,6 @@ public class User {
 
     public void setUserId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -63,11 +53,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getCreated() {
+    public Calendar getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Calendar created) {
         this.created = created;
     }
 
@@ -79,11 +69,11 @@ public class User {
         this.enable = enable;
     }
 
-    public Integer getIdRol() {
+    public Long getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(Integer idRol) {
+    public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
 }

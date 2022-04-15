@@ -1,11 +1,13 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Application.signup.Service;
 
 import dev.julioperez.virtualEducation.Announcement.Email.Application.Service.MailSenderService;
+import dev.julioperez.virtualEducation.Announcement.Email.Domain.Exception.ErrorOccurredWhenSendingEmailException;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.ModelMapper.SignupModelMapper;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.signup.Repository.SignupAdapterRepository;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.RegisterRequest;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.User;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.VerificationToken;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.VerifyTokenResponse;
 import dev.julioperez.virtualEducation.Shared.Application.ModelMapper.MailModelMapper;
 import dev.julioperez.virtualEducation.Shared.Application.encodeString.Service.StringEncoderService;
 
@@ -28,7 +30,7 @@ public class SignupServiceImplementation implements SignupService{
     }
 
     @Override
-    public void signup(RegisterRequest registerRequest) {
+    public Boolean signup(RegisterRequest registerRequest) throws ErrorOccurredWhenSendingEmailException {
         if(registerRequest.validateFields()) throw new RuntimeException();
         RegisterRequest registerWithPasswordEncoded = this.encodePasswordByRegisterRequest(registerRequest);
         User userToRecord = signupModelMapper.registerRequestToUser(registerWithPasswordEncoded);
@@ -38,6 +40,7 @@ public class SignupServiceImplementation implements SignupService{
         mailSenderService.sendMail(mailModelMapper.toEmailRequest(
                 registerRequest.getEmail(),
                 recordedValidationToken));
+        return Boolean.TRUE;
     }
 
     private RegisterRequest encodePasswordByRegisterRequest(RegisterRequest registerRequest){
@@ -47,7 +50,7 @@ public class SignupServiceImplementation implements SignupService{
 
     private String generateVerificationToken(User recordedUser){
         String token = UUID.randomUUID().toString();
-        VerificationToken verificationToken = signupModelMapper.userToVerificationToken(recordedUser, token);
+        VerificationToken verificationToken = signupModelMapper.userModelToVerificationToken(recordedUser, token);
         signupAdapterRepository.createToken(
                 verificationToken.getToken(),
                 verificationToken.getUserId());
@@ -55,7 +58,13 @@ public class SignupServiceImplementation implements SignupService{
     }
 
     @Override
-    public void verifyAccount(String token) {
-
+    public VerifyTokenResponse verifyAccount(String token) {
+        VerificationToken verificationTokenByTokenFound = signupAdapterRepository
+                .getVerificationTokenByToken(token);
+        User userEnabled = signupAdapterRepository.updateStatusToEnableAUser(
+                verificationTokenByTokenFound.getUserId());
+        if(Boolean.FALSE == userEnabled.isEnable()) throw new RuntimeException();
+        return signupModelMapper.processedVerifyByTokenResponseToVerifyTokenResponse(
+                userEnabled.isEnable());
     }
 }

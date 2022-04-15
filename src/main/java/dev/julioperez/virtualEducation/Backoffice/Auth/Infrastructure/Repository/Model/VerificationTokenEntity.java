@@ -1,40 +1,40 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.Calendar;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "token")
+@Table(name = "TOKEN", schema = "VIRTUAL_EDUCATION")
 public class VerificationTokenEntity {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @SequenceGenerator(name = "user_sequence", allocationSize = 1)
     private Long id;
 
+    @Column(name = "TOKEN", nullable = false, unique = true)
     private String token;
 
-    @Column(name = "userid")
-    private Long userId;
+    @Column(name = "ID_USER", nullable = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_ID_USER", nullable = false)
+    private UserEntity user;
 
-    @Column(name = "expirydate")
-    private Instant expiryDate;
+    @Column(name = "EXPIRY_DATE", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar expiryDate;
 
-    public VerificationTokenEntity(){}
-
-    public VerificationTokenEntity(Long id, String token, Long userId, Instant expiryDate) {
-        this.id = id;
+    public VerificationTokenEntity(String token, UserEntity user, Calendar expiryDate) {
         this.token = token;
-        this.userId = userId;
-        this.expiryDate = expiryDate;
-    }
-
-    public VerificationTokenEntity(String token, Long userId, Instant expiryDate) {
-        this.token = token;
-        this.userId = userId;
+        this.user = user;
         this.expiryDate = expiryDate;
     }
 }

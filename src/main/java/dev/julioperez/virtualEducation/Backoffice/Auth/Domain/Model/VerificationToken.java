@@ -1,25 +1,23 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model;
 
 import java.time.Instant;
+import java.util.Calendar;
 
 public class VerificationToken {
 
     private Long id;
     private String token;
     private Long userId;
-    private Instant expiryDate;
+    private Calendar expiryDate;
 
-    /**
-     * can exist two constructor with any argument and all argument least idUser
-     */
-    public VerificationToken(Long id, String token, Long userId, Instant expiryDate) {
+    public VerificationToken(Long id, String token, Long userId, Calendar expiryDate) {
         this.id = id;
         this.token = token;
         this.userId = userId;
         this.expiryDate = expiryDate;
     }
 
-    public VerificationToken(String token, Long userId, Instant expiryDate) {
+    public VerificationToken(String token, Long userId, Calendar expiryDate) {
         this.token = token;
         this.userId = userId;
         this.expiryDate = expiryDate;
@@ -54,11 +52,11 @@ public class VerificationToken {
         this.userId = userId;
     }
 
-    public Instant getExpiryDate() {
+    public Calendar getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Instant expiryDate) {
+    public void setExpiryDate(Calendar expiryDate) {
         this.expiryDate = expiryDate;
     }
 }

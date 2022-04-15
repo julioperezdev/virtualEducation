@@ -4,23 +4,21 @@ import java.util.Objects;
 
 public class RegisterRequest {
     private String email;
-    private String username;
     private String password;
-    private int idRol;
+    private Long idRol;
 
-    public RegisterRequest(String email, String username, String password, int idRol) {
+    public RegisterRequest(String email, String password, Long idRol) {
         this.email = email;
-        this.username = username;
         this.password = password;
         this.idRol = idRol;
     }
 
     public Boolean validateFields(){
-        return validateUsername() || validatePassword()  || validateIdRol();
+        return validateEmail() || validatePassword()  || validateIdRol();
     }
 
-    private Boolean validateUsername(){
-        return Objects.equals(username, null) || Objects.equals(username, "");
+    private Boolean validateEmail(){
+        return Objects.equals(email, null) || Objects.equals(email, "");
     }
 
     private Boolean validatePassword(){
@@ -39,14 +37,6 @@ public class RegisterRequest {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -55,11 +45,11 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public int getIdRol() {
+    public Long getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(int idRol) {
+    public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
 }

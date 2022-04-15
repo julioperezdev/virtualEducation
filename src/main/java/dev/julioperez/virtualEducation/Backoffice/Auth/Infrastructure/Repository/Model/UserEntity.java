@@ -1,54 +1,48 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "USER", schema = "VIRTUAL_EDUCATION")
 public class UserEntity {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @SequenceGenerator(name = "user_sequence", allocationSize = 1)
     private Long id;
 
-    private String username;
-
-    private String password;
-
+    @Column(name="EMAIL",nullable = false, unique = true)
     private String email;
 
-    private Date created;
+    @Column(name="PASSWORD",nullable = false, unique = true)
+    private String password;
 
+    @Column(name="CREATED",nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar created;
+
+    @Column(name="ENABLE",nullable = false)
     private Boolean enable;
 
-    @Column(name = "idrol")
-    private int idRol;
+    @Column(name = "ID_ROL", nullable = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "FK_USER_ROL", nullable = false)
+    private UserRolEntity userRol;
 
-    public UserEntity() {
-    }
-
-    public UserEntity(Long id, String username, String password, String email, Date created, Boolean enable, Integer idRol) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    public UserEntity(String email, String password, Calendar created, Boolean enable, UserRolEntity userRol) {
         this.email = email;
+        this.password = password;
         this.created = created;
         this.enable = enable;
-        this.idRol = idRol;
-    }
-
-    public UserEntity(String username, String password, String email, Date created, Boolean enable, Integer idRol) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.created = created;
-        this.enable = enable;
-        this.idRol = idRol;
+        this.userRol = userRol;
     }
 }

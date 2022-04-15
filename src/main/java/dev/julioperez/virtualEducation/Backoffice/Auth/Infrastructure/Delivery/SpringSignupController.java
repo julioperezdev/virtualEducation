@@ -3,6 +3,9 @@ package dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Delivery;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.signup.Delivery.SignupEndPoints;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.RegisterRequest;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.RegisterResponse;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.VerifyTokenResponse;
+import dev.julioperez.virtualEducation.Shared.Infrastructure.Delivery.RestResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,14 +19,14 @@ public class SpringSignupController {
     }
 
     @PostMapping
-    public void signupUser(RegisterRequest registerRequest){
+    public RestResponse<RegisterResponse> signupUser(RegisterRequest registerRequest){
         RegisterResponse registerResponse = signupEndPoints.signupUser(registerRequest);
-        //return
+        return new RestResponse<>(HttpStatus.CREATED, registerResponse);
     }
 
     @GetMapping("/{token}")
-    public void verificationToken(@PathVariable String token){
-        signupEndPoints.verifyAccountByToken(token);
-        //return
+    public RestResponse<VerifyTokenResponse> verificationToken(@PathVariable String token){
+        VerifyTokenResponse verifyTokenResponse = signupEndPoints.verifyAccountByToken(token);
+        return new RestResponse<>(HttpStatus.ACCEPTED, verifyTokenResponse);
     }
 }
