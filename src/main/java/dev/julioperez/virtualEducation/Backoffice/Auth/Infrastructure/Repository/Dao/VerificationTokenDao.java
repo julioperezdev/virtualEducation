@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+
 public interface VerificationTokenDao extends JpaRepository<VerificationTokenEntity, Long> {
 
 

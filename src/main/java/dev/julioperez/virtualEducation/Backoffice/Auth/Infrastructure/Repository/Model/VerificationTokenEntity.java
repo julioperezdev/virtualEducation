@@ -23,7 +23,7 @@ public class VerificationTokenEntity {
     @Column(name = "TOKEN", nullable = false, unique = true)
     private String token;
 
-    @Column(name = "ID_USER", nullable = false)
+    //@Column(name = "ID_USER", nullable = false)
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_ID_USER", nullable = false)
     private UserEntity user;

@@ -4,7 +4,7 @@ import dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public interface UserRolDao extends JpaRepository<UserRolEntity, Long> {
 
 }

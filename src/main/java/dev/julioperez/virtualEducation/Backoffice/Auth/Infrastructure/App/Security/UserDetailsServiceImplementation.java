@@ -13,7 +13,7 @@ import java.util.Collection;
 
 import static java.util.Collections.singletonList;
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImplementation implements UserDetailsService {
 
     private final UserDao userDao;

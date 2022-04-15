@@ -33,7 +33,7 @@ public class UserEntity {
     @Column(name="ENABLE",nullable = false)
     private Boolean enable;
 
-    @Column(name = "ID_ROL", nullable = false)
+    //@Column(name = "ID_ROL", nullable = false)
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_USER_ROL", nullable = false)
     private UserRolEntity userRol;

@@ -18,9 +18,8 @@ import org.springframework.stereotype.Service;
 public class SpringJavaMailer {
 
     private final JavaMailSender mailSender;
-    private final MailSenderService mailSenderService;
-    @Value("")
-    private final String emailFrom;
+    //@Value("")
+    //private final String emailFrom;
 
     public void sendMail(NotificationEmail notificationEmail){
         MimeMessagePreparator messagePreparator = mimeMessage -> {

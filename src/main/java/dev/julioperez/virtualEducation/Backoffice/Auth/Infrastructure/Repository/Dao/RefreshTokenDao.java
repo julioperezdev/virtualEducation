@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.Optional;
 
-@Repository
+
 public interface RefreshTokenDao extends JpaRepository<RefreshTokenEntity, Long> {
     /*
     =============================
