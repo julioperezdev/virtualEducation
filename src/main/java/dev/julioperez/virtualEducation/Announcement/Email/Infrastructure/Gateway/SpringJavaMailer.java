@@ -24,7 +24,7 @@ public class SpringJavaMailer {
     public void sendMail(NotificationEmail notificationEmail){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("gerencia@naturismoysaludintegral.com");
+            messageHelper.setFrom("contactos@lineaesperanza.com");
             //messageHelper.setFrom(emailFrom);
             messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setSubject(notificationEmail.getSubject());

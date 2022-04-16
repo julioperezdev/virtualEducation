@@ -16,13 +16,13 @@ public class SpringSignupController {
 
     private final SignupEndPoints signupEndPoints;
 
-    @PostMapping
-    public RestResponse<RegisterResponse> signupUser(RegisterRequest registerRequest){
+    @PostMapping("/user")
+    public RestResponse<RegisterResponse> signupUser(@RequestBody RegisterRequest registerRequest){
         RegisterResponse registerResponse = signupEndPoints.signupUser(registerRequest);
         return new RestResponse<>(HttpStatus.CREATED, registerResponse);
     }
 
-    @GetMapping("/{token}")
+    @GetMapping("/token/{token}")
     public RestResponse<VerifyTokenResponse> verificationToken(@PathVariable String token){
         VerifyTokenResponse verifyTokenResponse = signupEndPoints.verifyAccountByToken(token);
         return new RestResponse<>(HttpStatus.ACCEPTED, verifyTokenResponse);

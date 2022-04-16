@@ -12,12 +12,12 @@ import java.util.Calendar;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "TOKEN")
+@Table(name = "VERIFICATION_TOKEN")
 public class VerificationTokenEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @SequenceGenerator(name = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VERIFICATION_TOKEN_SEQUENCE")
+    @SequenceGenerator(name = "VERIFICATION_TOKEN_SEQUENCE", allocationSize = 1)
     private Long id;
 
     @Column(name = "TOKEN", nullable = false, unique = true)

@@ -16,8 +16,8 @@ import java.util.Date;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @SequenceGenerator(name = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_SEQUENCE")
+    @SequenceGenerator(name = "user_SEQUENCE", allocationSize = 1)
     private Long id;
 
     @Column(name="EMAIL",nullable = false, unique = true)

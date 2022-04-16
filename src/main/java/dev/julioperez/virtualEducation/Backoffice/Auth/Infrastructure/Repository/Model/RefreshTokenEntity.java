@@ -15,8 +15,8 @@ import java.util.Date;
 @Table(name = "REFRESH_TOKEN")
 public class RefreshTokenEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @SequenceGenerator(name = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REFRESH_TOKEN_SEQUENCE")
+    @SequenceGenerator(name = "REFRESH_TOKEN_SEQUENCE", allocationSize = 1)
     private Long id;
     @Column(name = "TOKEN", nullable = false, unique = true)
     private String token;

@@ -209,7 +209,7 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**")
+                .antMatchers("/api/signup/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
