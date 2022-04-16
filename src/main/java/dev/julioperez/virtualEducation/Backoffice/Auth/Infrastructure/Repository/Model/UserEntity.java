@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "USER", schema = "VIRTUAL_EDUCATION")
+@Table(name = "USERS")
 public class UserEntity {
 
     @Id

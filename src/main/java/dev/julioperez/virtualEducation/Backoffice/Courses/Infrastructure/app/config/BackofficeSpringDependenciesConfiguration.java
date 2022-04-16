@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 
+/*
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"dev.julioperez.virtualEducation.Backoffice.Courses"})
@@ -33,7 +34,7 @@ public class BackofficeSpringDependenciesConfiguration {
 
     /**
      * Course/Application/ModelMapper
-     */
+     *0/
 
     @Bean
     public CourseModelMapper courseModelMapper(){
@@ -52,7 +53,7 @@ public class BackofficeSpringDependenciesConfiguration {
 
     /**
      * Course/Application/Creator
-     */
+     *0/
 
     @Bean
     public CourseCreatorAdapterRepository courseCreatorRepository(){
@@ -71,7 +72,7 @@ public class BackofficeSpringDependenciesConfiguration {
 
     /**
      *Application/Course/Finder
-     */
+     *0/
 
     @Bean
     public CourseFinderAdapterRepository courseFinderRepository(){
@@ -90,10 +91,12 @@ public class BackofficeSpringDependenciesConfiguration {
 
     /**
      *OTHERS
-     */
+     *0/
 
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplateBuilder().setConnectTimeout(Duration.ofMillis(10000)).build();
     }
 }
+
+ */

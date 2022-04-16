@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "USER_ROL", schema = "VIRTUAL_EDUCATION")
+@Table(name = "USER_ROL")
 public class UserRolEntity {
 
     @Id

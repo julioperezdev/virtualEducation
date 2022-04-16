@@ -12,7 +12,7 @@ import java.util.Calendar;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "TOKEN", schema = "VIRTUAL_EDUCATION")
+@Table(name = "TOKEN")
 public class VerificationTokenEntity {
 
     @Id

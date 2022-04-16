@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/*
 @Configuration
 @EnableJpaRepositories(basePackages = "dev.julioperez.virtualEducation.Backoffice.Auth.*")
 //@EnableJpaRepositories(basePackages = "dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository.Dao")
@@ -26,7 +27,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EntityScan(basePackages = "dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model")
 @EnableTransactionManagement
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"dev.julioperez.virtualEducation.Backoffice.Auth.*"})
+@ComponentScan(basePackages = {"dev.julioperez.virtualEducation.*"})
+//@ComponentScan(basePackages = {"dev.julioperez.virtualEducation.Backoffice.Auth.*"})
 //@ComponentScan(basePackages = {"dev.julioperez.virtualEducation.Backoffice.Auth"})
 public class AuthSpringDependenciesConfiguration {
 
@@ -50,7 +52,7 @@ public class AuthSpringDependenciesConfiguration {
 
     /**
      * Auth/Application/ModelMapper
-     */
+     *0/
 
     @Bean
     public SignupModelMapper signupModelMapper(){
@@ -59,7 +61,7 @@ public class AuthSpringDependenciesConfiguration {
 
     /**
      * Auth/Application/signup
-     */
+     *0/
 
     @Bean
     public SignupAdapterRepository signupAdapterRepository(){
@@ -85,3 +87,5 @@ public class AuthSpringDependenciesConfiguration {
         return new SignupEndPoints(signupServiceImplementation(), signupModelMapper());
     }
 }
+
+*/

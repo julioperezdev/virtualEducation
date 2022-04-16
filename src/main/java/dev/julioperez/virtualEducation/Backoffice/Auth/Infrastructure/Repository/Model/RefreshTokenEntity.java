@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "REFRESH_TOKEN", schema = "VIRTUAL_EDUCATION")
+@Table(name = "REFRESH_TOKEN")
 public class RefreshTokenEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")

@@ -5,18 +5,16 @@ import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.RegisterRequ
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.RegisterResponse;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model.VerifyTokenResponse;
 import dev.julioperez.virtualEducation.Shared.Infrastructure.Delivery.RestResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/signup")
+@AllArgsConstructor
 public class SpringSignupController {
 
     private final SignupEndPoints signupEndPoints;
-
-    public SpringSignupController(SignupEndPoints signupEndPoints) {
-        this.signupEndPoints = signupEndPoints;
-    }
 
     @PostMapping
     public RestResponse<RegisterResponse> signupUser(RegisterRequest registerRequest){
