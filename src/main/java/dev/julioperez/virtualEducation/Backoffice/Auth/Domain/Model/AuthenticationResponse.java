@@ -1,14 +1,16 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model;
 
 import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AuthenticationResponse {
     private String authenticationToken;
     private String username;
     private String refreshToken;
-    private Instant expireAt;
+    private Calendar expireAt;
 
-    public AuthenticationResponse(String authenticationToken, String username, String refreshToken, Instant expireAt) {
+    public AuthenticationResponse(String authenticationToken, String username, String refreshToken, Calendar expireAt) {
         this.authenticationToken = authenticationToken;
         this.username = username;
         this.refreshToken = refreshToken;
@@ -39,11 +41,11 @@ public class AuthenticationResponse {
         this.refreshToken = refreshToken;
     }
 
-    public Instant getExpireAt() {
+    public Calendar getExpireAt() {
         return expireAt;
     }
 
-    public void setExpireAt(Instant expireAt) {
+    public void setExpireAt(Calendar expireAt) {
         this.expireAt = expireAt;
     }
 }

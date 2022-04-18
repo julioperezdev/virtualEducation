@@ -4,11 +4,21 @@ import dev.julioperez.virtualEducation.Announcement.Email.Application.Adapter.Ma
 import dev.julioperez.virtualEducation.Announcement.Email.Application.Service.MailSenderServiceImplementation;
 import dev.julioperez.virtualEducation.Announcement.Email.Infrastructure.Gateway.SpringJavaMailer;
 import dev.julioperez.virtualEducation.Announcement.Email.Infrastructure.Gateway.ThymeleafMailContentBuilder;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.ModelMapper.LoginModelMapper;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.ModelMapper.RefreshTokenModelMapper;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.ModelMapper.SignupModelMapper;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.login.Adapter.LoginAdapterSecurity;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.login.Delivery.LoginEndPoints;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.login.Service.LoginServiceImplementation;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.refreshToken.Adapter.RefreshTokenAdapterRepository;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.refreshToken.Delivery.RefreshTokenEndPoints;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Application.refreshToken.Service.RefreshTokenServiceImplementation;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.signup.Delivery.SignupEndPoints;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.signup.Repository.SignupAdapterRepository;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Application.signup.Service.SignupServiceImplementation;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.App.Security.JwtAuthenticationFilter;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.App.Security.JwtProvider;
+import dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.App.Security.ManagerAuthenticator;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository.Dao.RefreshTokenDao;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository.Dao.UserDao;
 import dev.julioperez.virtualEducation.Backoffice.Auth.Infrastructure.Repository.Dao.UserRolDao;
@@ -61,7 +71,7 @@ import java.time.Duration;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"dev.julioperez.virtualEducation.*"})
 @AllArgsConstructor
-public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapter {
+public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapter{
 
     //Backoffice.Course
     private final CourseDao courseDao;
@@ -72,6 +82,7 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
     private final RefreshTokenDao refreshTokenDao;
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtProvider jwtProvider;
     //Announcement.Email
     private final SpringJavaMailer springJavaMailer;
     private final ThymeleafMailContentBuilder thymeleafMailContentBuilder;
@@ -164,6 +175,16 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
         return new SignupModelMapper();
     }
 
+    @Bean
+    public LoginModelMapper loginModelMapper() throws Exception {
+        return new LoginModelMapper(loginAdapterSecurity());
+    }
+
+    @Bean
+    public RefreshTokenModelMapper refreshTokenModelMapper(){
+        return new RefreshTokenModelMapper();
+    }
+
     /**
      * Auth/Application/signup
      */
@@ -193,6 +214,44 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
     }
 
     /**
+     * Auth/Application/login
+     */
+
+    @Bean
+    public LoginEndPoints loginController() throws Exception {
+        return new LoginEndPoints(loginServiceImplementation());
+    }
+
+    @Bean
+    public LoginServiceImplementation loginServiceImplementation() throws Exception {
+        return new LoginServiceImplementation(loginAdapterSecurity(), loginModelMapper(), refreshTokenServiceImplementation());
+    }
+
+    @Bean
+    public LoginAdapterSecurity loginAdapterSecurity() throws Exception {
+        return new LoginAdapterSecurity(authenticationManagerBean(),jwtProvider);
+    }
+
+    /**
+     * Auth/Application/refreshToken
+     */
+
+    @Bean
+    public RefreshTokenEndPoints refreshTokenEndPoints(){
+        return new RefreshTokenEndPoints();
+    }
+
+    @Bean
+    public RefreshTokenServiceImplementation refreshTokenServiceImplementation(){
+        return new RefreshTokenServiceImplementation(refreshTokenAdapterRepository());
+    }
+
+    @Bean
+    public RefreshTokenAdapterRepository refreshTokenAdapterRepository(){
+        return new RefreshTokenAdapterRepository(refreshTokenDao, refreshTokenModelMapper());
+    }
+
+    /**
      * Auth/Infrastructure
      */
 
@@ -211,6 +270,8 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
                 .authorizeRequests()
                 .antMatchers("/api/signup/**")
                 .permitAll()
+                .antMatchers("/api/login")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -228,7 +289,14 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Auth/Infrastructure/Security
+     */
 
+    @Bean
+    public ManagerAuthenticator managerAuthenticator(){
+        return new ManagerAuthenticator();
+    }
 
     /**
      * =======================Announcement.Email======================

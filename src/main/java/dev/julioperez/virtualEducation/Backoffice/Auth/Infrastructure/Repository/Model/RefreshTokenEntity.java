@@ -25,5 +25,8 @@ public class RefreshTokenEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar createdDate;
 
-
+    public RefreshTokenEntity(String token, Calendar createdDate) {
+        this.token = token;
+        this.createdDate = createdDate;
+    }
 }

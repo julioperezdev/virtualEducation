@@ -1,14 +1,20 @@
 package dev.julioperez.virtualEducation.Backoffice.Auth.Domain.Model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class RefreshToken {
     private Long id;
     private String token;
-    private Date createDate;
+    private Calendar createDate;
 
-    public RefreshToken(Long id, String token, Date createDate) {
+    public RefreshToken(Long id, String token, Calendar createDate) {
         this.id = id;
+        this.token = token;
+        this.createDate = createDate;
+    }
+
+    public RefreshToken(String token, Calendar createDate) {
         this.token = token;
         this.createDate = createDate;
     }
@@ -29,11 +35,11 @@ public class RefreshToken {
         this.token = token;
     }
 
-    public Date getCreateDate() {
+    public Calendar getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(Calendar createDate) {
         this.createDate = createDate;
     }
 }
