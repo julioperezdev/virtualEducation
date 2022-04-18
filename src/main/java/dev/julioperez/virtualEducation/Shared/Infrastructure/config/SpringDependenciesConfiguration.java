@@ -227,9 +227,14 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
         return new LoginServiceImplementation(loginAdapterSecurity(), loginModelMapper(), refreshTokenServiceImplementation());
     }
 
+//    @Bean
+//    public LoginAdapterSecurity loginAdapterSecurity() throws Exception {
+//        return new LoginAdapterSecurity(authenticationManagerBean(),jwtProvider);
+//    }
+
     @Bean
     public LoginAdapterSecurity loginAdapterSecurity() throws Exception {
-        return new LoginAdapterSecurity(authenticationManagerBean(),jwtProvider);
+        return new LoginAdapterSecurity(managerAuthenticator(),jwtProvider);
     }
 
     /**
@@ -294,8 +299,8 @@ public class SpringDependenciesConfiguration extends WebSecurityConfigurerAdapte
      */
 
     @Bean
-    public ManagerAuthenticator managerAuthenticator(){
-        return new ManagerAuthenticator();
+    public ManagerAuthenticator managerAuthenticator() throws Exception {
+        return new ManagerAuthenticator(authenticationManagerBean());
     }
 
     /**

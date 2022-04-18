@@ -10,13 +10,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class LoginAdapterSecurity {
 
-    //private final ManagerAuthenticator managerAuthenticator;
-    private final AuthenticationManager authenticationManager;
+    private final ManagerAuthenticator managerAuthenticator;
+    //private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
 
-    public LoginAdapterSecurity(AuthenticationManager authenticationManager, JwtProvider jwtProvider) {
-        //this.managerAuthenticator = managerAuthenticator;
-        this.authenticationManager = authenticationManager;
+    public LoginAdapterSecurity(ManagerAuthenticator managerAuthenticator, JwtProvider jwtProvider) {
+        this.managerAuthenticator = managerAuthenticator;
+        //this.authenticationManager = authenticationManager;
         this.jwtProvider = jwtProvider;
     }
 
@@ -26,10 +26,10 @@ public class LoginAdapterSecurity {
     }
 
     private Authentication authenticateWithManager(LoginRequest loginRequest){
-        //Authentication authentication = managerAuthenticator.authenticateByEmailAndPassword(loginRequest);
-        Authentication authentication = this.authenticateByEmailAndPassword(loginRequest);
-        //managerAuthenticator.setAuthenticationToSecurityContext(authentication);
-        this.setAuthenticationToSecurityContext(authentication);
+        Authentication authentication = managerAuthenticator.authenticateByEmailAndPassword(loginRequest);
+        //Authentication authentication = this.authenticateByEmailAndPassword(loginRequest);
+        managerAuthenticator.setAuthenticationToSecurityContext(authentication);
+        //this.setAuthenticationToSecurityContext(authentication);
         return authentication;
     }
 
@@ -37,6 +37,7 @@ public class LoginAdapterSecurity {
         return jwtProvider.getJwtExpirationInMillis();
     }
 
+    /*
     public Authentication authenticateByEmailAndPassword(LoginRequest loginRequest){
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(
@@ -48,5 +49,7 @@ public class LoginAdapterSecurity {
     public void setAuthenticationToSecurityContext(Authentication authentication){
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+     */
 
 }
